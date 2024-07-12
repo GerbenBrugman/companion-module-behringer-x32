@@ -106,17 +106,37 @@ export interface ChannelChoicesOptions {
 	// TODO - more skipXXX
 }
 
-export const FaderLevelChoice: CompanionInputFieldNumber = {
-	type: 'number',
-	label: 'Fader Level (-90 = -inf)',
-	id: 'fad',
-	range: true,
-	required: true,
-	default: 0,
-	step: 0.1,
-	min: -90,
-	max: 10,
-}
+export const FaderLevelChoice: CompanionInputFieldNumber[] = [
+	{
+		type: 'checkbox',
+		label: 'Use a variable for Fader Level',
+		default: false,
+		id: 'useVariable',
+	},
+	{
+		type: 'number',
+		label: 'Fader Level (-90 = -inf)',
+		id: 'fad',
+		range: true,
+		required: true,
+		default: 0,
+		step: 0.1,
+		min: -90,
+		max: 10,
+		isVisible: (options: CompanionOptionValues): boolean => {
+			return !options.useVariable
+		},
+	},
+	{
+		type: 'textinput',
+		label: 'Variable Fader Level (e.g. $(internal:custom_my_level), NOTE: strings and out of range numbers will be ignored)',
+		id: 'varFad',
+		useVariables: true,
+		isVisible: (options: CompanionOptionValues): boolean => {
+			return !!options.useVariable
+		},
+	},
+]
 
 export const FaderLevelDeltaChoice: SomeCompanionActionInputField[] = [
 	{
