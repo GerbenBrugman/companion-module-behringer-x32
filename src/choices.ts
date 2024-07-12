@@ -106,7 +106,7 @@ export interface ChannelChoicesOptions {
 	// TODO - more skipXXX
 }
 
-export const FaderLevelChoice: CompanionInputFieldNumber[] = [
+export const FaderLevelChoice: SomeCompanionActionInputField[] = [
 	{
 		type: 'checkbox',
 		label: 'Use a variable for Fader Level',
